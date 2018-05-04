@@ -11,9 +11,19 @@
 //   console.log(num);
 // });
 
+// Example 3:
+// forEach([1,2,3], function(num, index){
+//   console.log(index);
+// });
+
+// Example 4:
+// forEach([1,2,3], function(num, index, arr){
+//   console.log(arr);
+// });
+
 function forEach(array, callback){
   for (var i = 0; i < array.length; i++){
-    callback(array[i]);
+    callback(array[i], i, array);
   }
 };
 
@@ -29,6 +39,17 @@ tests({
   'It should pass in the ith element as the first argument to the callback': function() {
     forEach([1], function(num){
       eq(num, 1);
+    });
+  },
+  'It should pass in the ith position as the second argument to the callback': function() {
+    forEach([1], function(num, index){
+      eq(index, 0);
+    });
+  },
+  'It should pass in the original array as the third argument to the callback': function() {
+    var testArray = [1,2,3]
+    forEach(testArray, function(num, index, arr){
+      eq(arr, testArray);
     });
   }
 });
